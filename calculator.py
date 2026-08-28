@@ -1,60 +1,37 @@
-print("simple calculator")
+def calculator():
+    print("🧮 Modern Calculator")
 
-while True :
+    while True:
+        try:
+            num1 = float(input("Enter first number: "))
+            operator = input("Enter operator (+, -, *, /, **, %, //): ").strip()
+            num2 = float(input("Enter second number: "))
 
-  try :
-        num1 = float(input("enter your first number :"))
-        operators = input("enter operator (+,-,*,/,**,%,//):")
-        num2 = float(input("enter your second number :"))
+            operations = {
+                "+": lambda a, b: a + b,
+                "-": lambda a, b: a - b,
+                "*": lambda a, b: a * b,
+                "/": lambda a, b: a / b if b != 0 else "Cannot divide by zero!",
+                "**": lambda a, b: a ** b,
+                "%": lambda a, b: a % b if b != 0 else "Cannot divide by zero!",
+                "//": lambda a, b: a // b if b != 0 else "Cannot divide by zero!",
+            }
 
-  except ValueError:
-     print("Invalid input ! please enter numbers only .")
-     continue
+            result = operations.get(operator)
 
-  if operators == "+" :
-            print("result:",num1 + num2)
+            if result:
+                print(f"Result: {result(num1, num2)}")
+            else:
+                print("Invalid operator!")
 
-  elif operators == "-" :
-    print("result:", num1 - num2)   
+        except ValueError:
+            print("Please enter valid numbers!")
 
-  elif operators == "*" :
-    print("result:", num1 * num2)   
-
-  elif operators == "/" :
-    if num2 != 0 :
-        print("result:", num1 / num2)
-    else :
-        print("cannot divide by zero !")
-
-  elif operators == "**" :  
-    print("result:",num1 ** num2)
-
-  elif operators == "%" :
-    if num2 != 0 :
-        print("result:",num1 % num2)    
-    else :
-        print("cannot divide by zero !")            
-
-  elif operators == "//" :
-    if num2 != 0 :
-        print("result:",num1 // num2)    
-    else :
-        print("cannot divide by zero !")  
-    print("result:",num1 // num2)
-  else :
-    print("invalid operator")        
-
-  choice = input("\nDo you want another calculation? (y/n): ")
-
-  if choice.lower() != "y":
-        print("Thank you for using the calculator!")
-        break
+        choice = input("\nDo you want another calculation? (y/n): ").lower()
+        if choice != "y":
+            print("👋 Thanks for using the calculator!")
+            break
 
 
-
-
-
-
-
-
-
+if __name__ == "__main__":
+    calculator()
